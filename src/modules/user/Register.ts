@@ -4,8 +4,8 @@ import { User } from "../../entity/User";
 import { RegisterInput } from "./register/RegisterInput";
 import { isAuth } from "../middleware/isAuth";
 import { logger } from "../middleware/logger";
-import { sendEmail } from "../utils/sendEmail";
-import { createConfirmationUrl } from "../utils/createConfirmatonUrl";
+// import { sendEmail } from "../utils/sendEmail";
+// import { createConfirmationUrl } from "../utils/createConfirmatonUrl";
 
 @Resolver()
 export class RegisterResolver {
@@ -15,7 +15,6 @@ export class RegisterResolver {
     return "Hello World!";
   }
 
-  @UseMiddleware(logger)
   @Mutation(() => User)
   async register(
     @Arg("payload") { firstName, lastName, email, password }: RegisterInput
@@ -29,7 +28,7 @@ export class RegisterResolver {
       password: hashedPassword
     }).save();
 
-    await sendEmail(email, await createConfirmationUrl(user.id));
+    // await sendEmail(email, await createConfirmationUrl(user.id));
 
     return user;
   }

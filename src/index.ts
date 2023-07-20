@@ -4,27 +4,18 @@ import {
   ApolloServerPluginLandingPageLocalDefault
 } from "apollo-server-core";
 import Express from "express";
-import { buildSchema } from "type-graphql";
-import AppDataSource from "./datasource";
+import { AppDataSource } from "./datasource";
 import appSession from "./appSession";
 import http from "http";
 import "reflect-metadata";
+import { createSchema } from "./utils/createSchema";
 
 const main = async () => {
   await AppDataSource.initialize();
 
   const isProduction = process.env.NODE_ENV === "production";
 
-  const schema = await buildSchema({
-    resolvers: [__dirname + "/modules/**/*.ts"],
-    emitSchemaFile: true,
-    authChecker: ({ context: { req } }) => {
-      // here we can read the user from context
-      // and check his permission in the db against the `roles` argument
-      // that comes from the `@Authorized` decorator, eg. ["ADMIN", "MODERATOR"]
-      return !!req.session.userId;
-    }
-  });
+  const schema = await createSchema();
 
   const app = Express();
   app.use(appSession);
