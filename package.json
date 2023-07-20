@@ -41,6 +41,6 @@
   },
   "scripts": {
     "start": "ts-node-dev --respawn --files src/index.ts",
-    "test": "jest"
+    "test": "jest --watch"
   }
 }
