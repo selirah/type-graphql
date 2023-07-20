@@ -11,7 +11,7 @@ beforeAll(async (): Promise<DataSource> => {
   return conn;
 });
 
-afterAll(async () => await conn.destroy());
+afterAll(async () => conn.destroy());
 
 const registerMutation = `
 mutation($payload: RegisterInput!){
