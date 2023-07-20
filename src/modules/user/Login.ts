@@ -1,10 +1,12 @@
-import { Resolver, Mutation, Arg, Ctx } from "type-graphql";
+import { Resolver, Mutation, Arg, Ctx, UseMiddleware } from "type-graphql";
 import bcrypt from "bcryptjs";
 import { User } from "../../entity/User";
 import { MyContext } from "../../types/MyContext";
+import { logger } from "../middleware/logger";
 
 @Resolver()
 export class LoginResolver {
+  @UseMiddleware(logger) // you can parse multiple middleware
   @Mutation(() => User, { nullable: true })
   async login(
     @Arg("email") email: string,

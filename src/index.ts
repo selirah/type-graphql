@@ -9,6 +9,10 @@ import appSession from "./appSession";
 import http from "http";
 import "reflect-metadata";
 import { createSchema } from "./utils/createSchema";
+// import queryComplexity, {
+//   fieldExtensionsEstimator,
+//   simpleEstimator
+// } from "graphql-query-complexity";
 
 const main = async () => {
   await AppDataSource.initialize();
@@ -30,6 +34,21 @@ const main = async () => {
     schema,
     context: ({ req, res }) => ({ req, res }),
     introspection: !isProduction
+    // validationRules: [
+    //   queryComplexity({
+    //     maximumComplexity: 8,
+    //     variables: {},
+    //     onComplete: (complexity: number) => {
+    //       console.log("Query Complexity:", complexity);
+    //     },
+    //     estimators: [
+    //       fieldExtensionsEstimator(),
+    //       simpleEstimator({
+    //         defaultComplexity: 1
+    //       })
+    //     ]
+    //   })
+    // ]
   });
 
   await apolloServer.start();

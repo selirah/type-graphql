@@ -6,6 +6,9 @@ import { LogoutResolver } from "./user/Logout";
 import { ForgotPasswordResolver } from "./user/ForgotPassword";
 import { ConfirmUserResolver } from "./user/ConfirmUser";
 import { ChangePasswordResolver } from "./user/ChangePassword";
+import { CreateUserResolver } from "./user/CreateUser";
+import { CreateProductResolver } from "./user/CreateUser";
+// import { ProfilePictureResolver } from "./user/ProfilePicture";
 
 export const resolvers: NonEmptyArray<Function> = [
   RegisterResolver,
@@ -14,5 +17,8 @@ export const resolvers: NonEmptyArray<Function> = [
   LogoutResolver,
   ForgotPasswordResolver,
   ConfirmUserResolver,
-  ChangePasswordResolver
+  ChangePasswordResolver,
+  CreateUserResolver,
+  CreateProductResolver
+  // ProfilePictureResolver
 ];
